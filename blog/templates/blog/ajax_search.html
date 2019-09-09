@@ -1,0 +1,7 @@
+{% if classes %}
+        {% for class in classes %}
+            <p>{{ class.title }}</p>
+        {% endfor %}
+{% else %}
+    <p>No classes found.</p>
+{% endif %}

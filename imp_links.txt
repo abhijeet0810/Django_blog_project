@@ -1,0 +1,112 @@
+https://medium.com/@minghz42/docker-setup-for-django-on-mysql-1f063c9d16a0
+https://medium.com/zeitcode/a-simple-recipe-for-django-development-in-docker-bonus-testing-with-selenium-6a038ec19ba5
+https://docs.docker.com/compose/django/
+
+
+
+
+sudo docker-compose run web django-admin startproject composeexample .
+
+sudo docker-compose run web python manage.py startapp blog
+
+sudo docker-compose run web python manage.py makemigrations #name_of_the_app
+
+docker-compose run web python manage.py migrate
+
+sudo docker-compose run web python manage.py shell
+
+
+index.html
+43             <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+
+<h2 class="card-title" href="{% url 'post-detail' post.id %}" >{{ post.title }}</h2>
+
+<h2><a class="card-title" href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+
+
+
+
+
+
+base.html
+
+top 13 lines
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+        <meta name="google" content="notranslate" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+            crossorigin="anonymous" />
+        <title>Django</title>
+    </head>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
+changes:
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+        <title>Salient Django App</title>
+    </head>
+
+
+
+
+    3398E1
+
+sidebar.html Aout Us card
+    <!-- Sidebar Widgets Column -->
+<div class="col-md-4 float-right ">
+<div class="card my-4">
+        <h5 class="card-header">About Us</h5>
+    <div class="card-body">
+        <p class="card-text"> This app is running inside a docker container using Mysql database..!</p>
+        <a href="#"
+           class="btn btn-danger">Know more!</a>
+    </div>
+</div>
+</div>
+
+sidebar.html Search card
+<div class="col-md-4 float-right ">
+    <div class="card my-4">
+        <h2>Search box</h2>
+    <div class="search">
+<input type="text" class="form-control input-sm" maxlength="64" placeholder="Search" />
+<button type="submit" class="btn btn-primary btn-sm">Search</button>
+</div>
+
+</div>
+
+Main sidebar.html
+<div class="col-md-4 float-right ">
+        <div class="card my-4">
+                <h3>Search Post</h3>
+                {% csrf_token %}
+                <input type="text" id="search" name="search"/>
+                <ul id="search-results">
+                </ul>
+        </div>
+</div>
