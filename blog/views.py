@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.http import HttpResponseRedirect
 # Create your views here.
 from django.views import generic
-from .models import Post
+from .models import Post, Comment
+from .forms import CommentForm
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
@@ -13,6 +15,20 @@ class PostList(generic.ListView):
 #     template_name = 'index.html' # <app>/<model>_<viewtype>.html
 #     context_object_name = 'post_list'
 #     ordering = ['-date_posted']
+
+
+def add_comment_to_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return HttpResponseRedirect(post.get_absolute_url())
+    else:
+        form = CommentForm()
+    return render(request, 'blog/add_comment_to_post.html', {'form': form})
 
 class PostDetail(generic.DetailView):
     model = Post

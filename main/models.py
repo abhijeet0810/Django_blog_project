@@ -12,7 +12,7 @@ from django.db import models
 
 
 # This Tutorial, Question and Choice are like a table in the database 
-# and the tutorial_title, tutorial_content,  tutorial_published, etc are like columns in the table 
+# and the tutorial_title, tutorial_content,  tutorial_published, etc are like columns in that table 
 class Tutorial(models.Model):
     tutorial_title = models.CharField(max_length=200)
     tutorial_content = models.TextField()
